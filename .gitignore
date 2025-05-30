@@ -1,0 +1,6 @@
+# Ignorar entorno virtual y archivos comunes
+venv/
+__pycache__/
+*.pyc
+.env
+*.db
