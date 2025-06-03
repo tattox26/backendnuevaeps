@@ -3,7 +3,6 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from db import get_db
 
 solicitudes = Blueprint('solicitudes', __name__)
-
 @solicitudes.route('/solicitudes', methods=['POST'])
 @jwt_required()
 
@@ -40,7 +39,6 @@ def listar_solicitudes():
         offset = (page - 1) * per_page
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
-        # Consulta paginada
         cursor.execute("""
                 SELECT s.*, m.nombre AS medicamento_nombre
                 FROM solicitudes s
@@ -49,8 +47,6 @@ def listar_solicitudes():
                 LIMIT %s OFFSET %s
             """, (user_id, per_page, offset))
         resultados = cursor.fetchall()
-
-        # Opcional: contar total para saber cuántas páginas hay
         cursor.execute("SELECT COUNT(*) as total FROM solicitudes WHERE usuario_id = %s", (user_id,))
         total = cursor.fetchone()['total']
 
@@ -65,21 +61,3 @@ def listar_solicitudes():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
-#@bp.route('/medicamentos', methods=['GET'])
-@solicitudes.route('/medicamentos', methods=['GET'])
-@jwt_required()
-def listar_medicamentos():
-    try: 
-        conn = get_db()
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT id, nombre FROM medicamentos")
-        resultados = cursor.fetchall()
-        
-        return jsonify({
-            "medicamentos": resultados
-        }), 200
-    
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    return jsonify(medicamentos)

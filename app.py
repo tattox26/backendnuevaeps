@@ -3,19 +3,19 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from config import Config
 from db import close_db
-from auth.routes import auth, bcrypt
-
+from routes.auth import auth, bcrypt
+from routes.medicamentos import medicamentos
+from routes.solicitudes import solicitudes
 app = Flask(__name__)
 app.config.from_object(Config)
 
 CORS(app)
 JWTManager(app)
-bcrypt.init_app(app)  # Aquí se inicializa bcrypt correctamente
-#from auth.routes import auth
-from solicitudes.routes import solicitudes
+bcrypt.init_app(app)
 
 app.register_blueprint(auth)
 app.register_blueprint(solicitudes)
+app.register_blueprint(medicamentos)
 
 app.teardown_appcontext(close_db)
 

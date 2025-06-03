@@ -15,6 +15,6 @@
 
 ## EJECUCION
 
-* Crear la BD llamada nuevaeps
-* Importar la BD 
+* Crear la BD llamada nuevaeps.sql
+* Importar la BD que esta dentro de la carpeta
 
