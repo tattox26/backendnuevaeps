@@ -1,9 +1,13 @@
 ## INSTALACION EN WINDOWS
 
 * Descargar Python version 3
-* instalar flask
-* instalar flask-mysql-connector 
-* Ejecutar python app.py
+* Istalar PIP
+* instalar= pip install Flask
+* instalar = pip flask-mysql-connector 
+* instalar = pip install flask_cors  
+* instalar = pip install flask_jwt_extended  
+* instalar = pip install flask_bcrypt  
+* Ejecutar = python app.py o py app.py 
 
 ## ENDPOINTS
 
